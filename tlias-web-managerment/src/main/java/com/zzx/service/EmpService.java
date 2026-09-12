@@ -1,0 +1,23 @@
+package com.zzx.service;
+
+import com.zzx.pojo.Emp;
+import com.zzx.pojo.EmpQueryParam;
+import com.zzx.pojo.PageResult;
+
+import java.util.List;
+
+public interface EmpService {
+    /**
+     * 分页查询
+     * @param page
+     * @param pageSize
+     * @return
+     */
+//    PageResult<Emp> page(Integer page, Integer pageSize, String name, Integer gender,
+//                 LocalDate begin,LocalDate end);
+    PageResult<Emp> page(EmpQueryParam  param);
+
+    void save(Emp emp);
+
+    void delete(List<Integer> ids);
+}
