@@ -30,31 +30,37 @@
         <java.version>17</java.version>
     </properties>
     <dependencies>
+        <!--Spring MVC基础起步依赖：提供Web开发能力（内嵌Tomcat、Spring MVC框架、HTTP消息转换等）-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc</artifactId>
         </dependency>
+        <!--MyBatis起步依赖：整合MyBatis与Spring Boot，提供SqlSessionFactory、Mapper扫描、@Mapper注解支持等-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>4.0.1</version>
         </dependency>
 
+        <!--MySQL数据库驱动：JDBC驱动实现（com.mysql.cj.jdbc.Driver），runtime表示仅运行期需要、编译期不依赖-->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!--Lombok：通过注解（@Data、@Slf4j等）自动生成getter/setter、构造器、日志对象等样板代码，optional表示不传递给子模块-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--Web测试起步依赖：提供JUnit 5、Mockito、MockMvc等测试框架支持（test作用域仅在测试阶段生效）-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webmvc-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <!--MyBatis测试起步依赖：提供@MybatisTest等MyBatis专用测试支持-->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter-test</artifactId>
@@ -62,13 +68,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!--分页插件PageHelper-->
+        <!--分页插件PageHelper：为MyBatis提供物理分页能力，startPage()一行代码即可实现分页查询-->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.4.7</version>
         </dependency>
 
+        <!--阿里云OSS对象存储SDK：用于将文件（如图片）上传到阿里云OSS云服务-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
