@@ -15,13 +15,17 @@ import org.springframework.util.CollectionUtils;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//Spring注解：声明本类是业务层组件，启动时被扫描并存入IOC容器，Controller中才能注入使用
 @Service
 public class EmpServiceImpl implements EmpService {
 
+    //Spring依赖注入：容器自动把EmpMapper的实现类对象塞给这个变量
     @Autowired
     private EmpMapper empMapper;
+    //Spring依赖注入：容器自动把EmpExprMapper的实现类对象塞给这个变量
     @Autowired
     private EmpExprMapper empExprMapper;
+    //Spring依赖注入：容器自动把EmpLogService的实现类对象塞给这个变量
     @Autowired
     private EmpLogService empLogService;
 
@@ -60,6 +64,7 @@ public class EmpServiceImpl implements EmpService {
     }
 
     //保存员工
+    //Spring事务注解：方法内的数据库操作要么全部成功、要么全部回滚，出错时不会留下半截数据
     @Transactional//事务
     @Override
     public void save(Emp emp) {
@@ -87,6 +92,8 @@ public class EmpServiceImpl implements EmpService {
 
     }
 
+    //Spring事务注解：rollbackFor = Exception.class 表示遇到任何Exception也回滚
+    //（默认只对RuntimeException回滚，加上它更安全）
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void delete(List<Integer> ids) {

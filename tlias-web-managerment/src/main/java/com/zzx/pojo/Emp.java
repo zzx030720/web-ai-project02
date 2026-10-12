@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//Lombok注解：编译时自动生成所有字段的getter/setter、toString、equals等方法，不用手写
 @Data
 public class Emp {
     private Integer id; //ID,主键

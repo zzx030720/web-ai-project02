@@ -14,6 +14,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
+//Spring注解：声明本类是组件，启动时被扫描并存入IOC容器，Controller中才能注入使用
 @Component
 public class AliyunOSSOperator {
 
@@ -24,6 +25,7 @@ public class AliyunOSSOperator {
 //    @Value("${aliyun.oss.region}")
 //    private String region;
 
+    //Spring依赖注入：容器自动把AliyunOSSProperties对象（读好了OSS配置）塞给这个变量
     @Autowired
     private AliyunOSSProperties aliyunOSSOperator;
 

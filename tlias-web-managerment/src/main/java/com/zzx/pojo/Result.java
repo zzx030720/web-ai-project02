@@ -5,6 +5,7 @@ import lombok.Data;
 /**
  * 后端统一返回结果
  */
+//Lombok注解：编译时自动生成所有字段的getter/setter、toString、equals等方法，不用手写
 @Data
 public class Result {
 

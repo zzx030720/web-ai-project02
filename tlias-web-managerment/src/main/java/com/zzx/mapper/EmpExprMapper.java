@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+//MyBatis注解：告诉MyBatis为这个接口自动生成实现类，并交给Spring容器管理，service中才能注入使用
+//具体的SQL（批量插入/删除）写在 resources/com/zzx/mapper/EmpExprMapper.xml 中
 @Mapper
 public interface EmpExprMapper {
 

@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 
+//Spring注解：声明本类是业务层组件，启动时被扫描并存入IOC容器，Controller中才能注入使用
 @Service
 public class DeptServiceImpl implements DeptService {
 
+    //Spring依赖注入：容器自动把DeptMapper的实现类对象塞给这个变量，不用手动new
     @Autowired
     private DeptMapper deptMapper;
 
