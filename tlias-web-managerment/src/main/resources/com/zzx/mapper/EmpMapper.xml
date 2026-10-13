@@ -11,7 +11,7 @@
             #{id}
         </foreach>
     </delete>
-    <select id="list" resultType="com.zzx.pojo.Emp">
+    <select id="list" resultType="com.zzx.pojo.Emp"># 用于指定 SQL 查询结果每行数据封装成什么对象类型
         select e.*, d.name deptName from emp as e left join dept as d on e.dept_id = d.id
         <where>
             <if test="name != null and name != ''">

@@ -74,7 +74,7 @@ public class EmpServiceImpl implements EmpService {
             emp.setCreateTime(LocalDateTime.now());
             emp.setUpdateTime(LocalDateTime.now());
             empMapper.insert(emp);
-        int i = 1/0;
+//        int i = 1/0;
 
 //        保存员工工作信息
             List<EmpExpr> exprList = emp.getExprList();

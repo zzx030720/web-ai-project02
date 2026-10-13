@@ -28,3 +28,8 @@ aliyun:
   endpoint: https://oss-cn-beijing.aliyuncs.com
   bucketName: zzx-javaweb-ai
   region: cn-beijing
+
+#分页插件
+pagehelper:
+  reasonable: true
+  helper-dialect: mysql
