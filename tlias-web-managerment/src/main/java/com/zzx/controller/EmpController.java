@@ -56,4 +56,26 @@ public class EmpController {
         empService.delete(ids);
         return Result.success();
     }
+
+    /**
+     * 查询回显
+     */
+    //处理GET /emps/{id}请求：如 /emps/5，表示查询id为5的员工的详细信息
+    @GetMapping("/{id}")
+    public Result getInfo(@PathVariable Integer id){ //@PathVariable：取出URL路径中{id}的值赋给id形参
+        log.info("根据id查询员工的详细信息");
+        Emp emp  = empService.getInfo(id);
+        return Result.success(emp);
+    }
+
+    /**
+     * 更新员工信息
+     */
+    //处理PUT /emps请求：用于根据id修改员工信息（包括工作经历）
+    @PutMapping
+    public Result update(@RequestBody Emp emp){ //@RequestBody：把请求体里的JSON数据转成Emp对象
+        log.info("修改员工信息, {}", emp);
+        empService.update(emp);
+        return Result.success();
+    }
 }

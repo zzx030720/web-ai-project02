@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 public class LogTest {
 
     private static final Logger log = LoggerFactory.getLogger(LogTest.class);
+    //JUnit5注解：标记方法为一个单元测试，IDEA/ Maven-surefire 可直接右键运行（无需main方法）
     @Test
     public void testLog(){
 //        System.out.println(LocalDateTime.now() + " : 开始计算...");

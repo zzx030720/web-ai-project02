@@ -14,6 +14,7 @@ import java.util.List;
 //等于 @Controller + @ResponseBody：声明本类是控制器并交给Spring管理，
 //所有方法的返回值都自动转成JSON写回浏览器（不做页面跳转）
 @RestController
+//Spring注解：公共路径前缀，本类所有接口的地址都以 /depts 开头，如 GET /depts、POST /depts
 @RequestMapping("/depts")
 public class DeptController {
 

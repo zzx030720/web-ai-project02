@@ -3,10 +3,12 @@ package com.zzx.mapper;
 import com.zzx.pojo.Emp;
 import com.zzx.pojo.EmpQueryParam;
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 
 import java.util.List;
+import java.util.Map;
 
 //MyBatis注解：告诉MyBatis为这个接口自动生成实现类，并交给Spring容器管理，service中才能注入使用
 @Mapper
@@ -51,4 +53,23 @@ public interface EmpMapper {
      * @param ids
      */
     void deleteById(List<Integer> ids);
+
+    /**
+     * 根据ID获取员工
+     * @param id
+     * @return
+     */
+    Emp getById(Integer id);
+
+    /**
+     * 根据ID修改员工
+     * @param emp
+     */
+    void updateById(Emp emp);
+
+    /**
+     * 统计各个职位的员工人数
+     */
+    @MapKey("pos")
+    List<Map<String,Object>> countEmpJobData();
 }
