@@ -2,10 +2,7 @@ package com.zzx.mapper;
 
 import com.zzx.pojo.Emp;
 import com.zzx.pojo.EmpQueryParam;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.MapKey;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 import java.util.Map;
@@ -32,6 +29,17 @@ public interface EmpMapper {
     //    @Select("select e.*,d.name deptName from emp e left join dept d on e.dept_id = d.id order by e.update_time desc ")
 //    public List<Emp> list(String name, Integer gender,
 //                          LocalDate begin, LocalDate end);
+    /**
+     * 分页条件查询员工列表（对应 EmpMapper.xml 中 <select id="list"> 的动态SQL）
+     *
+     * @param param 查询条件载体（姓名、性别、入职日期范围等）
+     */
+
+    //MyBatis规则：方法只接收一个对象参数时，XML中的 #{xxx} 和 <if test="xxx != null"> 会自动
+    //到该对象的属性里取值，即 #{name} 实际取的是 param.getName()，#{gender} 取 param.getGender()，
+    //#{begin}/#{end} 取 param.getBegin()/getEnd()。所以虽然XML里没有出现 param 这个名字，
+    //这个参数实际上就是动态SQL所有条件的数据来源，删掉它条件查询就取不到值了。
+    //把多个散参数封装成一个对象的好处：后续新增查询条件只需给 EmpQueryParam 加属性，方法签名不用改。
     public List<Emp> list(EmpQueryParam param);
 
     /**
@@ -79,4 +87,17 @@ public interface EmpMapper {
     @MapKey("name")
     List<Map> countEmpGenderData();
 
+    /**
+     * 查询员工列表
+     */
+    @Select("select * from emp")
+    List<Emp> listAll();
+
+    /**
+     * 根据部门id查询员工数量
+     * @param id
+     * @return
+     */
+    @Select("SELECT COUNT(*) FROM emp WHERE dept_id = #{id}")
+    Integer getEmpCountByDeptId(Integer id);
 }

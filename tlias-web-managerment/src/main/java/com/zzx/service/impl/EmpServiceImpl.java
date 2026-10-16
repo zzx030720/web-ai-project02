@@ -143,4 +143,13 @@ public class EmpServiceImpl implements EmpService {
 
     }
 
+    /**
+     * 查询所有员工
+     * @return
+     */
+    @Override
+    public List<Emp> listAll() {
+        return empMapper.listAll();
+    }
+
 }
