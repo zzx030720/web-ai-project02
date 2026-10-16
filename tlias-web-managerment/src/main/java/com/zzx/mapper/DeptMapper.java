@@ -54,4 +54,6 @@ public interface DeptMapper {
     //MyBatis注解：执行UPDATE语句，根据id修改部门名称和更新时间
     @Update("update dept set name = #{name}, update_time = #{updateTime} where id = #{id}")
     void updateById(Dept dept);
+
+
 }

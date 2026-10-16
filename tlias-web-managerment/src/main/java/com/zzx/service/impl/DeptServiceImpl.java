@@ -1,6 +1,9 @@
 package com.zzx.service.impl;
 
+import com.zzx.anno.LogOperation;
+import com.zzx.exception.DeptNotEmptyException;
 import com.zzx.mapper.DeptMapper;
+import com.zzx.mapper.EmpMapper;
 import com.zzx.pojo.Dept;
 import com.zzx.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +20,10 @@ public class DeptServiceImpl implements DeptService {
     @Autowired
     private DeptMapper deptMapper;
 
+    @Autowired
+    private EmpMapper empMapper;
+
+    @LogOperation
     @Override
     public List<Dept> findAll() {
         return deptMapper.findAll();
@@ -24,6 +31,10 @@ public class DeptServiceImpl implements DeptService {
 
     @Override
     public void deleteById(Integer id) {
+        Integer empCount = empMapper.getEmpCountByDeptId(id);
+        if (empCount != null && empCount > 0) {
+            throw new DeptNotEmptyException("对不起，当前部门下有员工，不能直接删除！"); // 抛出自定义异常
+        }
         deptMapper.deleteById(id);
     }
 
@@ -44,5 +55,10 @@ public class DeptServiceImpl implements DeptService {
     public void updateById(Dept dept) {
         dept.setUpdateTime(LocalDateTime.now());
         deptMapper.updateById(dept);
+    }
+
+    @Override
+    public Integer getEmpCountByDeptId(Integer id) {
+        return empMapper.getEmpCountByDeptId(id);
     }
 }

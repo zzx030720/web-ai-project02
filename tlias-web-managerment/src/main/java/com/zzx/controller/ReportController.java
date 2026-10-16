@@ -1,5 +1,6 @@
 package com.zzx.controller;
 
+import com.zzx.pojo.ClassOption;
 import com.zzx.pojo.JobOption;
 import com.zzx.pojo.Result;
 import com.zzx.service.ReportService;
@@ -38,5 +39,25 @@ public class ReportController {
         log.info("统计员工性别信息");
         List<Map> genderList = reportService.getEmpGenderData();
         return Result.success(genderList);
+    }
+
+    /**
+     * 统计各个班级的学生人数
+     */
+    @GetMapping("/studentCountData")
+    public Result getStudentCountData(){
+        log.info("统计班级学生人数");
+        ClassOption classOption = reportService.getStudentCountData();
+        return Result.success(classOption);
+    }
+
+    /**
+     * 学员学历统计
+     */
+    @GetMapping("/studentDegreeData")
+    public Result getStudentDegreeData(){
+        log.info("学员学历统计");
+        List<Map> degreeList = reportService.getStudentDegreeData();
+        return Result.success(degreeList);
     }
 }

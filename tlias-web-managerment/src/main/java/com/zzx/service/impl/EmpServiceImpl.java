@@ -7,6 +7,7 @@ import com.zzx.mapper.EmpMapper;
 import com.zzx.pojo.*;
 import com.zzx.service.EmpLogService;
 import com.zzx.service.EmpService;
+import com.zzx.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,9 @@ import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //Spring注解：声明本类是业务层组件，启动时被扫描并存入IOC容器，Controller中才能注入使用
 @Service
@@ -141,6 +144,33 @@ public class EmpServiceImpl implements EmpService {
 //            empExprMapper.insertBatch(exprList);
 //        }
 
+    }
+
+    /**
+     * 查询所有员工
+     * @return
+     */
+    @Override
+    public List<Emp> listAll() {
+        return empMapper.listAll();
+    }
+
+    /**
+     * 登录
+     * @param emp
+     * @return
+     */
+    @Override
+    public LoginInfo login(Emp emp) {
+        Emp empResult = empMapper.getUsernameAndPassword(emp);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("id", empResult.getId());
+        claims.put("username", empResult.getUsername());
+        String token = JwtUtils.generateJwt(claims);
+        if (empResult != null){
+            return new LoginInfo(empResult.getId(), empResult.getUsername(), empResult.getName(), token);
+        }
+        return null;
     }
 
 }

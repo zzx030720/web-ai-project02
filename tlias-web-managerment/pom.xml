@@ -82,6 +82,19 @@
             <version>3.17.4</version>
         </dependency>
 
+        <!-- JWT依赖-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
+
+        <!--AOP起步依赖：Spring Boot 4中原spring-boot-starter-aop已更名为spring-boot-starter-aspectj，提供Spring AOP + AspectJ注解支持-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aspectj</artifactId>
+        </dependency>
+
 
     </dependencies>
 

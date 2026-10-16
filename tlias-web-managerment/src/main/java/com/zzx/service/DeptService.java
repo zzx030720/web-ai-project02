@@ -1,6 +1,7 @@
 package com.zzx.service;
 
 import com.zzx.pojo.Dept;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -36,4 +37,11 @@ public interface DeptService {
      * @param dept
      */
     void updateById(Dept dept);
+
+    /**
+     * 根据部门id查询员工数量
+     * @param id
+     * @return
+     */
+    Integer getEmpCountByDeptId(Integer id);
 }

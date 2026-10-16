@@ -18,9 +18,18 @@ public class GlobalExceptionHandler {
     //这里写 Exception 属于“兜底”处理，任何未被其他 @ExceptionHandler 匹配的异常都会走这里
     @ExceptionHandler
     public Result ex(Exception e){//方法形参中指定能够处理的异常类型
-        e.printStackTrace();//打印堆栈中的异常信息
+        log.error("程序出错了",e);//用日志框架记录异常堆栈（替代 e.printStackTrace()）
         //捕获到异常之后，响应一个标准的Result
         return Result.error("对不起,操作失败,请联系管理员");
+    }
+
+    //Spring注解：专门处理“部门下还有员工不能删除”这类可预期的业务异常，
+    //它会比兜底的 ex(Exception) 方法优先匹配（异常类型更具体），
+    //并把异常自带的提示信息原样返回给前端展示
+    @ExceptionHandler
+    public Result handleDeptNotEmptyException(DeptNotEmptyException e) {
+        //关键：用 e.getMessage() 取出抛出异常时写入的提示语，而不是写死的通用文案
+        return Result.error(e.getMessage());
     }
 
     //Spring注解：专门处理 MySQL 唯一键冲突时 Spring 报的 DuplicateKeyException（比如新增员工时用户名重复），
@@ -34,5 +43,7 @@ public class GlobalExceptionHandler {
         String[] arr = errMsg.split(" ");
         return Result.error(arr[2] + "已存在");
     }
+
+    
 
 }

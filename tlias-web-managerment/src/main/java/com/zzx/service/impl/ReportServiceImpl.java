@@ -1,7 +1,10 @@
 package com.zzx.service.impl;
 
 import com.zzx.mapper.EmpMapper;
+import com.zzx.mapper.StudentMapper;
+import com.zzx.pojo.ClassOption;
 import com.zzx.pojo.JobOption;
+import com.zzx.pojo.Student;
 import com.zzx.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,8 @@ public class ReportServiceImpl implements ReportService {
 
     @Autowired
     private EmpMapper empMapper;
+    @Autowired
+    private StudentMapper studentMapper;
 
     @Override
     public JobOption getEmpJobData() {
@@ -30,5 +35,22 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<Map> getEmpGenderData() {
         return empMapper.countEmpGenderData();
+    }
+
+    @Override
+    public ClassOption getStudentCountData() {
+        List<Map<String, Object>> list = studentMapper.countStudentCountData();
+        List<Object> clazzList = list.stream().map(dataMap -> dataMap.get("class_name")).toList();
+        List<Object> dataList = list.stream().map(dataMap -> dataMap.get("total")).toList();
+        return new ClassOption(clazzList, dataList);
+    }
+
+    /**
+     * 获取学生学历数据
+     * @return
+     */
+    @Override
+    public List<Map> getStudentDegreeData() {
+        return studentMapper.countDegreeData();
     }
 }

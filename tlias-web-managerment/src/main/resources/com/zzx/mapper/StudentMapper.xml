@@ -1,0 +1,39 @@
+<!--定义Mapper映射文件的约束和基本结构-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.mapper.StudentMapper">
+
+    <!--分页查询-->
+    <select id="page" resultType="com.zzx.pojo.Student">
+        SELECT s.*,c.name AS clazzName FROM student s left join clazz c on s.clazz_id = c.id
+        <where>
+            <if test="name != null and name != ''" >
+                s.name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="degree != null and degree != 0" >
+                s.degree = #{degree}
+            </if>
+            <if test="clazzId != null and clazzId != 0" >
+                s.clazz_id = #{clazzId}
+            </if>
+        </where>
+    </select>
+
+    <!-- 统计各个班级的学生人数 -->
+    <select id="countStudentCountData" resultType="java.util.Map">
+        select c.name class_name, count(*) total from clazz c,student s
+        where c.id = s.clazz_id group by c.name;
+    </select>
+
+
+<!--    别名 = Map 的 key = 返回给前端的 JSON 字段名,它会一路透传出去。-->
+    <select id="countDegreeData" resultType="java.util.Map">
+        select (case degree when 1 then '初中'
+                            when 2 then '高中'
+                            when 3 then '大专'
+                            when 4 then '本科'
+                            when 5 then '硕士'
+                            when 6 then '博士' end) as name ,count(*) value from student group by degree;
+    </select>
+</mapper>

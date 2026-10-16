@@ -2,10 +2,13 @@ package com.zzx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.server.servlet.context.ServletComponentScan;
+
 
 //SpringBoot核心注解：声明这是启动配置类，并自动完成三件事——
 //1.标注为配置类 2.开启自动配置（内嵌Tomcat、数据源等自动装配） 3.扫描本包及子包下的@Component/@Service等注解
 @SpringBootApplication
+@ServletComponentScan // 开启Servlet组件扫描（让@WebFilter标注的TokenFilter生效）
 public class TliasWebManagermentApplication {
 
     public static void main(String[] args) {
