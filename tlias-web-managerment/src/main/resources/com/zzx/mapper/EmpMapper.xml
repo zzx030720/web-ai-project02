@@ -105,4 +105,12 @@
         order by total
     </select>
 
+    <!-- 统计员工的性别信息 -->
+    <select id="countEmpGenderData" resultType="java.util.Map">
+        select
+            if(gender = 1, '男', '女') as name,
+            count(*) as value
+        from emp group by gender ;
+    </select>
+
 </mapper>
