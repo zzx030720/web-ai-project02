@@ -1,0 +1,43 @@
+<!--定义Mapper映射文件的约束和基本结构-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzx.mapper.LogMapper">
+
+    <!--    操作日志分页条件查询
+           注意：这里不要写 limit。PageHelper 会在执行前自动改写成
+           select count(0) ... 统计总数，再拼上 limit ?,? 取当前页-->
+    <select id="selectByLogQueryParam" resultType="com.zzx.pojo.OperateLog">
+        select id,
+               operate_emp_id,
+               operate_emp_name,
+               operate_time,
+               class_name,
+               method_name,
+               method_params,
+               return_value,
+               cost_time
+        from operate_log
+        <where>
+            <if test="operateEmpName != null and operateEmpName != ''">
+                and operate_emp_name like concat('%', #{operateEmpName}, '%')
+            </if>
+            <if test="className != null and className != ''">
+                and class_name like concat('%', #{className}, '%')
+            </if>
+            <if test="methodName != null and methodName != ''">
+                and method_name like concat('%', #{methodName}, '%')
+            </if>
+            <!-- operate_time 是 datetime，end 只精确到天，必须用 < end+1天，
+                 否则 end 当天 00:00 之后的数据会被漏掉 -->
+            <if test="begin != null">
+                and operate_time &gt;= #{begin}
+            </if>
+            <if test="end != null">
+                and operate_time &lt; date_add(#{end}, interval 1 day)
+            </if>
+        </where>
+        order by operate_time desc, id desc
+    </select>
+
+</mapper>

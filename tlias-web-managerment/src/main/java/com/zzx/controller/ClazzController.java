@@ -1,7 +1,6 @@
 package com.zzx.controller;
 
 
-import com.zzx.anno.LogOperation;
 import com.zzx.pojo.*;
 import com.zzx.service.ClazzService;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,6 @@ public class ClazzController {
     /**
      * 添加班级
      */
-    @LogOperation
     @PostMapping
     public Result save(@RequestBody Clazz clazz) {
         log.info("添加班级,参数:{}", clazz);
@@ -58,14 +56,5 @@ public class ClazzController {
         log.info("删除班级,参数:{}", id);
         clazzService.delete(id);
         return Result.success();
-    }
-
-    /**
-     * 查询所有班级
-     */
-    @GetMapping("/list")
-    public Result list(){
-        log.info("查询所有班级");
-        return Result.success(clazzService.listAll());
     }
 }

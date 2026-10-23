@@ -74,12 +74,4 @@ public class ClazzServiceImpl implements ClazzService {
         log.info("删除班级,参数:{}", id);
         clazzMapper.delete(id);
     }
-
-    /**
-     * 查询所有班级
-     */
-    @Override
-    public List<Clazz> listAll() {
-        return clazzMapper.listAll();
-    }
 }

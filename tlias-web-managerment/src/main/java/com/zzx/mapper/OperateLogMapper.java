@@ -2,7 +2,6 @@ package com.zzx.mapper;
 
 
 import com.zzx.pojo.OperateLog;
-import com.zzx.pojo.OperateLog;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 

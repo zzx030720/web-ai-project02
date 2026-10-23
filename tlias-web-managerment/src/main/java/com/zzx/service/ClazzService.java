@@ -4,8 +4,6 @@ import com.zzx.pojo.Clazz;
 import com.zzx.pojo.ClazzQueryParam;
 import com.zzx.pojo.PageResult;
 
-import java.util.List;
-
 public interface ClazzService {
     /**
      * 分页查询
@@ -31,10 +29,4 @@ public interface ClazzService {
      * 删除班级
      */
     void delete(Integer id);
-
-    /**
-     * 查询所有班级
-     */
-    List<Clazz> listAll();
-
 }
